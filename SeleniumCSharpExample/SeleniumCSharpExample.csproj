@@ -63,10 +63,12 @@
     <Compile Include="LoginPage.cs" />
     <Compile Include="TableExamplePage.cs" />
     <Compile Include="Tests\LoginTests.cs" />
+    <Compile Include="Tests\TableExampleTests.cs" />
     <Compile Include="UserFormPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\BaseTests.cs" />
     <Compile Include="Tests\UserFormTests.cs" />
+    <Compile Include="Utils\Utilties.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
