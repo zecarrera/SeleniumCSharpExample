@@ -10,7 +10,6 @@ namespace SeleniumCSharpExample
         private readonly IWebDriver m_Driver;
         //private readonly WebDriverWait m_Wait;
         public const string BaseUrl = "http://executeautomation.com/demosite/index.html";
-        
 
         [FindsBy(How = How.Id, Using = "TitleId")]
         public IWebElement TitleDropDown { get; set; }
