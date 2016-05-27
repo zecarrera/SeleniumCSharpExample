@@ -4,9 +4,9 @@ using OpenQA.Selenium.Support.PageObjects;
 
 namespace SeleniumCSharpExample
 {
-    public class LoginPage
+    public class LoginPage:Base
     {
-        private readonly IWebDriver m_Driver;
+        //private readonly IWebDriver m_Driver;
 
         public LoginPage(IWebDriver driver)
         {
@@ -14,10 +14,10 @@ namespace SeleniumCSharpExample
             {
                 throw new ArgumentNullException();
             }
-            m_Driver = driver;
-            m_Driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(10));
+            Driver = driver;
+            Driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(10));
             //m_Wait = new WebDriverWait(m_Driver, TimeSpan.FromSeconds(30));
-            PageFactory.InitElements(m_Driver, this); //Initializes the driver and page elements
+            PageFactory.InitElements(Driver, this); //Initializes the driver and page elements
         }
 
         [FindsBy(How = How.Name, Using = "UserName")]
@@ -52,7 +52,7 @@ namespace SeleniumCSharpExample
 
         public void NavigateToLoginPage()
         {
-            m_Driver.Navigate().GoToUrl("http://executeautomation.com/demosite/Login.html");
+            Driver.Navigate().GoToUrl("http://executeautomation.com/demosite/Login.html");
         }
     }
 }

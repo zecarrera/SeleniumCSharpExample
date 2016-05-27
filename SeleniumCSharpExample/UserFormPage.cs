@@ -5,9 +5,8 @@ using OpenQA.Selenium.Support.UI;
 
 namespace SeleniumCSharpExample
 {
-    public class UserFormPage
+    public class UserFormPage:Base
     {
-        private readonly IWebDriver m_Driver;
         //private readonly WebDriverWait m_Wait;
         public const string BaseUrl = "http://executeautomation.com/demosite/index.html";
 
@@ -44,15 +43,15 @@ namespace SeleniumCSharpExample
             {
                 throw new ArgumentNullException();
             }
-            m_Driver = driver;
-            m_Driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(10));
+            Driver = driver;
+            Driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(10));
             //m_Wait = new WebDriverWait(m_Driver, TimeSpan.FromSeconds(30));
-            PageFactory.InitElements(m_Driver, this); //Initializes the driver and page elements
+            PageFactory.InitElements(Driver, this); //Initializes the driver and page elements
         }
 
         public void GoToHomePage()
         {
-            m_Driver.Navigate().GoToUrl(BaseUrl);
+            Driver.Navigate().GoToUrl(BaseUrl);
         }
 
         public void EnterInitial(string textInput)
