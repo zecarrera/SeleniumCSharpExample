@@ -1,5 +1,6 @@
 ﻿using System;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.PageObjects;
 using OpenQA.Selenium.Support.UI;
 
 namespace SeleniumCSharpExample
@@ -9,15 +10,34 @@ namespace SeleniumCSharpExample
         private readonly IWebDriver m_Driver;
         //private readonly WebDriverWait m_Wait;
         public const string BaseUrl = "http://executeautomation.com/demosite/index.html";
-        public readonly By Title = By.Name("TitleId");
-        public readonly By Initial = By.Name("Initial");
-        public readonly By FirstName = By.Name("FirstName");
-        public readonly By MiddleName = By.Name("MiddleName");
-        public readonly By GenderMale = By.Name("Male");
-        public readonly By GenderFemale = By.Name("Female");
-        public readonly By EnglishLanguage = By.Name("english");
-        public readonly By HindiLanguage = By.Name("Hindi");
-        public readonly By SaveButton = By.Name("Save");
+        
+
+        [FindsBy(How = How.Id, Using = "TitleId")]
+        public IWebElement TitleDropDown { get; set; }
+
+        [FindsBy(How=How.Name, Using= "Initial")]
+        public IWebElement InitialTxt { get; set;}
+
+        [FindsBy(How = How.Name, Using = "FirstName")]
+        public IWebElement FirstNameTxt { get; set; }
+
+        [FindsBy(How = How.Name, Using = "MiddleName")]
+        public IWebElement MiddleNameTxt { get; set; }
+
+        [FindsBy(How = How.Name, Using = "Male")]
+        public IWebElement GenderMale { get; set; }
+
+        [FindsBy(How = How.Name, Using = "Female")]
+        public IWebElement GenderFemale { get; set; }
+
+        [FindsBy(How = How.Name, Using = "english")]
+        public IWebElement EnglishLanguage { get; set; }
+
+        [FindsBy(How = How.Name, Using = "Hindi")]
+        public IWebElement HindiLanguage { get; set; }
+
+        [FindsBy(How = How.Name, Using = "Save")]
+        public IWebElement SaveBtn { get; set; }
 
         public UserFormPage(IWebDriver driver)
         {
@@ -28,6 +48,7 @@ namespace SeleniumCSharpExample
             m_Driver = driver;
             m_Driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(10));
             //m_Wait = new WebDriverWait(m_Driver, TimeSpan.FromSeconds(30));
+            PageFactory.InitElements(m_Driver, this); //Initializes the driver and page elements
         }
 
         public void GoToHomePage()
@@ -37,17 +58,17 @@ namespace SeleniumCSharpExample
 
         public void EnterInitial(string textInput)
         {
-            m_Driver.FindElement(Initial).SendKeys(textInput);
+            InitialTxt.SendKeys(textInput);
         }
 
         public void EnterFirstName(string textInput)
         {
-            m_Driver.FindElement(FirstName).SendKeys(textInput);
+            FirstNameTxt.SendKeys(textInput);
         }
 
         public void EnterMiddleName(string textInput)
         {
-            m_Driver.FindElement(MiddleName).SendKeys(textInput);
+            MiddleNameTxt.SendKeys(textInput);
         }
 
         public void SelectGender(bool isMale)
@@ -57,7 +78,7 @@ namespace SeleniumCSharpExample
             {
                 gender = GenderMale;
             }
-            m_Driver.FindElement(gender).Click();
+            gender.Click();
         }
 
         public void SelectKnownLanguage(string language)
@@ -67,18 +88,18 @@ namespace SeleniumCSharpExample
             {
                 elementToCheck = HindiLanguage;
             }
-            if(!m_Driver.FindElement(elementToCheck).Selected)
-                m_Driver.FindElement(elementToCheck).Click();
+            if(!elementToCheck.Selected)
+                elementToCheck.Click();
         }
 
         public void ClickSaveButton()
         {
-            m_Driver.FindElement(SaveButton).Click();
+            SaveBtn.Click();
         }
 
         public void SelectTitle(string input)
         {
-            new SelectElement(m_Driver.FindElement(Title)).SelectByText(input);
+            new SelectElement(TitleDropDown).SelectByText(input);
         }
 
         public void FillOutUserForm(string title, string initial, string firstName, string middleName, bool isMale,
