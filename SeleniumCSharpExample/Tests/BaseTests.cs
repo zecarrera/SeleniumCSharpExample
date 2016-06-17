@@ -12,7 +12,8 @@ namespace SeleniumCSharpExample.Tests
         
         public static IWebDriver GetDriver()
         {
-            Driver = new FirefoxDriver();
+         //   Driver = new FirefoxDriver();
+            Driver = new OpenQA.Selenium.Chrome.ChromeDriver();
             return Driver;
         }
 
